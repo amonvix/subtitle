@@ -1,10 +1,22 @@
-# binaries
-subtitle
+# Python
+.venv/
+__pycache__/
+*.pyc
 
-# temp artifacts
+# Outputs (pipeline)
+*.mp4
 *.wav
-*.srt
 *.json
+*.srt
 
-# macOS
+# Go
+bin/
+*.exe
+
+# VSCode
+.vscode/
+.vscode-server/
+
+# OS
 .DS_Store
+Thumbs.db
