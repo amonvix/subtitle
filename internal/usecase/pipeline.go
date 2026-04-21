@@ -25,6 +25,17 @@ type VideoPipeline struct {
 	SRT        ports.SRTWriter
 }
 
+func NewVideoPipeline(video ports.VideoProcessor,
+	transcribe ports.Transcriber,
+	translate ports.Translator,
+	srt ports.SRTWriter,) *VideoPipeline {
+	return &VideoPipeline{Video:      video,
+		Transcribe: transcribe,
+		Translate:  translate,
+		SRT:        srt,
+	}
+}
+
 func (p *VideoPipeline) Run(cfg PipelineConfig) error {
 	if cfg.WorkingDir == "" {
 		cfg.WorkingDir = filepath.Join(os.TempDir(), "subtitle-work")

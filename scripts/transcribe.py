@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import json
+from typing import Any, Dict, List, cast
 
 import whisper
 
@@ -12,8 +13,10 @@ def main() -> None:
     parser.add_argument("--model", default="base", help="Whisper model size")
     args = parser.parse_args()
 
-    model = whisper.load_model(args.model)
-    result = model.transcribe(args.audio)
+    model = whisper.load_model(args.model, device="cpu")
+    result = model.transcribe(args.audio, fp16=False)
+
+    segments_data= cast(List[Dict[str, Any]], result.get("segments", []))
 
     segments = [
         {
@@ -21,7 +24,7 @@ def main() -> None:
             "end": segment["end"],
             "text": segment["text"].strip(),
         }
-        for segment in result.get("segments", [])
+        for segment in segments_data
     ]
 
     with open(args.output, "w", encoding="utf-8") as f:

@@ -10,6 +10,10 @@ type LibreTranslateService struct {
 	Endpoint   string
 }
 
+func NewLibreTranslateService() *LibreTranslateService{
+	return &LibreTranslateService{}
+}
+
 func (l *LibreTranslateService) TranslateSRT(inputSRT, outputSRT, sourceLang, targetLang string) error {
 	if l.ScriptPath == "" {
 		l.ScriptPath = "scripts/translate_srt.py"

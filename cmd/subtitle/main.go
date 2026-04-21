@@ -28,17 +28,24 @@ func main() {
 	translationService := translation.NewLibreTranslateService()
 	srtWriter := srt.NewWriter()
 
-	pipeline := usecase.NewPipeline(
+	pipeline := usecase.NewVideoPipeline(
 		videoService,
 		transcriptionService,
 		translationService,
 		srtWriter,
 	)
 
-	err := pipeline.Execute(*input, *output, *source, *target)
-	if err != nil {
-		log.Fatal(err)
-	}
+	cfg := usecase.PipelineConfig{
+	InputVideo:  *input,
+	OutputVideo: *output,
+	SourceLang:  *source,
+	TargetLang:  *target,
+}
+
+err := pipeline.Run(cfg)
+if err != nil {
+	log.Fatal(err)
+}
 
 	log.Println("Processing completed successfully")
 }

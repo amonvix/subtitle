@@ -9,15 +9,19 @@ import (
 	"time"
 )
 
+type whisperSegment struct {
+	Start float64 `json:"start"`
+	End   float64 `json:"end"`
+	Text  string  `json:"text"`
+}
+
 type WhisperService struct {
 	ScriptPath string
 	Model      string
 }
 
-type whisperSegment struct {
-	Start float64 `json:"start"`
-	End   float64 `json:"end"`
-	Text  string  `json:"text"`
+func NewWhisperService() *WhisperService {
+	return &WhisperService{}
 }
 
 func (w *WhisperService) Transcribe(audioPath string) ([]domain.Segment, error) {
