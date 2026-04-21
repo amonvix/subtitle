@@ -10,6 +10,10 @@ import (
 
 type Writer struct{}
 
+func NewWriter() *Writer{
+	return &Writer{}
+}
+
 func (w *Writer) Write(path string, segments []domain.Segment) error {
 	var b strings.Builder
 	for i, seg := range segments {

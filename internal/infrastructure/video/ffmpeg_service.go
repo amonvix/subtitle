@@ -7,6 +7,10 @@ import (
 
 type FFmpegService struct{}
 
+func NewFFmpegService() *FFmpegService{
+	return &FFmpegService{}
+}
+
 func (f *FFmpegService) ExtractAudio(videoPath, audioPath string) error {
 	cmd := exec.Command(
 		"ffmpeg",

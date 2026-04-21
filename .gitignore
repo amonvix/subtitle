@@ -20,3 +20,6 @@ bin/
 # OS
 .DS_Store
 Thumbs.db
+
+# IA Agent
+.codex
